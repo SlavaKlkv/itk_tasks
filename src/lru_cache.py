@@ -2,7 +2,7 @@ import unittest.mock
 
 
 def lru_cache(func=None, *, maxsize=128):
-    def decorator(decorated_func):
+    def decorator(decorating_func):
         cache = {}
         keys_queue = []
 
@@ -12,7 +12,7 @@ def lru_cache(func=None, *, maxsize=128):
                 keys_queue.remove(key)
                 keys_queue.append(key)
                 return cache[key]
-            result = decorated_func(*args, **kwargs)
+            result = decorating_func(*args, **kwargs)
             cache[key] = result
             keys_queue.append(key)
             if len(keys_queue) > maxsize:
